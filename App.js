@@ -1,30 +1,32 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { colors } from "./src/theme/colors";
-import { spacing } from "./src/theme/spacing";
 import { useFonts } from "expo-font";
-import { typoGraphy } from "./src/theme/typography";
 import Text from "./src/components/text/text";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./src/srceens/home";
+import Details from "./src/srceens/details";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    'Antonio': require('./assets/fonts/Antonio-ExtraLight.ttf'),
-    'Spartan-Bold': require('./assets/fonts/LeagueSpartan-ExtraBold.ttf'),
-    'Spartan-Regular': require('./assets/fonts/LeagueSpartan-Regular.ttf'),
+    Antonio: require("./assets/fonts/Antonio-ExtraLight.ttf"),
+    "Spartan-Bold": require("./assets/fonts/LeagueSpartan-ExtraBold.ttf"),
+    "Spartan-Regular": require("./assets/fonts/LeagueSpartan-Regular.ttf"),
   });
 
   if (!fontsLoaded) {
-    return <Text>Font is Loading</Text>
+    return <Text>Font is Loading</Text>;
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={{fontFamily: typoGraphy.primaryBold, fontSize: spacing[5]}}>Open up App.js to start working on your app!</Text>
-      <Text preset="h2">
-        Open up App.js to start working on your app!
-      </Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer theme={DarkTheme}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Details" component={Details} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

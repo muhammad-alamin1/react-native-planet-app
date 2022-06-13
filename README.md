@@ -1,1 +1,1 @@
-# react-native-planet-app
+# React Native Planet App
